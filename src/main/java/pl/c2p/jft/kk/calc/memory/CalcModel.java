@@ -5,4 +5,10 @@ public class CalcModel {
     public double a = 0, b = 0, result = 0;
     public int operator = 0;
 
+    public void reset(){
+        a = 0;
+        b = 0;
+        result = 0;
+        operator = 0;
+    }
 }

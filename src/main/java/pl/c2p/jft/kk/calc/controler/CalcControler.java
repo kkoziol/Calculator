@@ -104,6 +104,7 @@ public class CalcControler {
 
         if (action.equals("Clear")) {
             calcWindow.setDisplay("");
+            calcModel.reset();
         }
         if (action.equals("Delete")) {
             String s = calcWindow.readDisplay();
