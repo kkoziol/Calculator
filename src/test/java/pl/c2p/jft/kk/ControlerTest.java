@@ -138,7 +138,7 @@ public class ControlerTest
 
         InOrder inOrder = Mockito.inOrder(calcWindow);
         inOrder.verify(calcWindow).setDisplay("-");
-        inOrder.verify(calcWindow).setDisplay("7");
+        inOrder.verify(calcWindow).setDisplay("-7");
 
     }
 
