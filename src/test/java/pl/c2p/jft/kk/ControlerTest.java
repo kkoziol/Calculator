@@ -6,6 +6,7 @@ import pl.c2p.jft.kk.calc.controler.CalcControler;
 import pl.c2p.jft.kk.calc.memory.CalcModel;
 import pl.c2p.jft.kk.calc.ui.CalcWindow;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 
 public class ControlerTest
@@ -85,4 +86,25 @@ public class ControlerTest
 
         verify(calcWindow).setDisplay("Error");
     }
+    @Test
+    public void shouldClearStateAndDisplay()
+    {
+        CalcModel calcModel = new CalcModel();
+        CalcWindow calcWindow = spy(CalcWindow.class);
+        CalcControler calcControler = new CalcControler(calcModel,calcWindow);
+
+        calcControler.buttonPressed("8");
+        calcControler.buttonPressed("/");
+        calcControler.buttonPressed("8");
+        calcControler.buttonPressed("Clear");
+
+        verify(calcWindow,times(4)).setDisplay(anyString());
+        verify(calcWindow,atLeast(2)).setDisplay("");
+
+        assertThat(calcModel.a).isEqualTo(0);
+        assertThat(calcModel.b).isEqualTo(0);
+        assertThat(calcModel.result).isEqualTo(0);
+        assertThat(calcModel.operator).isEqualTo(0);
+    }
+
 }
