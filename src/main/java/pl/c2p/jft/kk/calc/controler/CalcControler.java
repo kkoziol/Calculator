@@ -89,13 +89,16 @@ public class CalcControler {
                     break;
 
                 case 4:
+                    if (calcModel.b == 0) {
+                        calcWindow.setDisplay("Error");
+                        return;
+                    }
                     calcModel.result = calcModel.a / calcModel.b;
                     break;
 
                 default:
                     calcModel.result = 0;
             }
-
             calcWindow.setDisplay("" + calcModel.result);
         }
 
