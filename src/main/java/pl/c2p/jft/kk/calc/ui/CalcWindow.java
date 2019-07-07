@@ -1,19 +1,21 @@
-package pl.c2p.jft.kk.calc;
+package pl.c2p.jft.kk.calc.ui;
+
+import pl.c2p.jft.kk.calc.controler.CalcControler;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 
-public class Calc implements ActionListener {
+public class CalcWindow implements ActionListener {
     JFrame f;
     JTextField t;
     JButton b1, b2, b3, b4, b5, b6, b7, b8, b9, b0, bdiv, bmul, bsub, badd, bdec, beq, bdel, bclr;
 
-    static double a = 0, b = 0, result = 0;
-    static int operator = 0;
+    private CalcControler calcControler;
 
-    Calc() {
+    public CalcWindow() {
         f = new JFrame("Calculator");
         t = new JTextField();
         b1 = new JButton("1");
@@ -106,105 +108,23 @@ public class Calc implements ActionListener {
         beq.addActionListener(this);
         bdel.addActionListener(this);
         bclr.addActionListener(this);
+
+    }
+
+    public void registerObserver(CalcControler calcControler) {
+        this.calcControler = calcControler;
     }
 
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == b1)
-            t.setText(t.getText().concat("1"));
-
-        if (e.getSource() == b2)
-            t.setText(t.getText().concat("2"));
-
-        if (e.getSource() == b3)
-            t.setText(t.getText().concat("3"));
-
-        if (e.getSource() == b4)
-            t.setText(t.getText().concat("4"));
-
-        if (e.getSource() == b5)
-            t.setText(t.getText().concat("5"));
-
-        if (e.getSource() == b6)
-            t.setText(t.getText().concat("6"));
-
-        if (e.getSource() == b7)
-            t.setText(t.getText().concat("7"));
-
-        if (e.getSource() == b8)
-            t.setText(t.getText().concat("8"));
-
-        if (e.getSource() == b9)
-            t.setText(t.getText().concat("9"));
-
-        if (e.getSource() == b0)
-            t.setText(t.getText().concat("0"));
-
-        if (e.getSource() == bdec)
-            t.setText(t.getText().concat("."));
-
-        if (e.getSource() == badd) {
-            a = Double.parseDouble(t.getText());
-            operator = 1;
-            t.setText("");
-        }
-
-        if (e.getSource() == bsub) {
-            a = Double.parseDouble(t.getText());
-            operator = 2;
-            t.setText("");
-        }
-
-        if (e.getSource() == bmul) {
-            a = Double.parseDouble(t.getText());
-            operator = 3;
-            t.setText("");
-        }
-
-        if (e.getSource() == bdiv) {
-            a = Double.parseDouble(t.getText());
-            operator = 4;
-            t.setText("");
-        }
-
-        if (e.getSource() == beq) {
-            b = Double.parseDouble(t.getText());
-
-            switch (operator) {
-                case 1:
-                    result = a + b;
-                    break;
-
-                case 2:
-                    result = a - b;
-                    break;
-
-                case 3:
-                    result = a * b;
-                    break;
-
-                case 4:
-                    result = a / b;
-                    break;
-
-                default:
-                    result = 0;
-            }
-
-            t.setText("" + result);
-        }
-
-        if (e.getSource() == bclr)
-            t.setText("");
-
-        if (e.getSource() == bdel) {
-            String s = t.getText();
-            t.setText("");
-            for (int i = 0; i < s.length() - 1; i++)
-                t.setText(t.getText() + s.charAt(i));
-        }
+        String action = ((JButton) e.getSource()).getText();
+        calcControler.buttonPressed(action);
     }
 
-    public static void main(String... s) {
-        new Calc();
+    public void setDisplay(String text) {
+        t.setText(text);
     }
+    public String readDisplay() {
+        return t.getText();
+    }
+
 }
