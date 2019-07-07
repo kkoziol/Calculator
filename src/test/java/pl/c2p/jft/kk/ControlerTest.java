@@ -109,7 +109,7 @@ public class ControlerTest
     }
 
     @Test
-    public void shouldDeletaLastCharacter()
+    public void shouldDeleteLastCharacter()
     {
         CalcModel calcModel = new CalcModel();
         CalcWindow calcWindow = spy(CalcWindow.class);
@@ -123,6 +123,22 @@ public class ControlerTest
         inOrder.verify(calcWindow).setDisplay("8");
         inOrder.verify(calcWindow).setDisplay("87");
         inOrder.verify(calcWindow).setDisplay("8");
+
+    }
+
+    @Test
+    public void shouldBePossibleToUseNegativeNumbers ()
+    {
+        CalcModel calcModel = new CalcModel();
+        CalcWindow calcWindow = spy(CalcWindow.class);
+        CalcController calcController = new CalcController(calcModel,calcWindow);
+
+        calcController.buttonPressed("-");
+        calcController.buttonPressed("7");
+
+        InOrder inOrder = Mockito.inOrder(calcWindow);
+        inOrder.verify(calcWindow).setDisplay("-");
+        inOrder.verify(calcWindow).setDisplay("7");
 
     }
 
