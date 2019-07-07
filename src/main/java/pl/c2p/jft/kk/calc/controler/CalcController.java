@@ -3,47 +3,41 @@ package pl.c2p.jft.kk.calc.controler;
 import pl.c2p.jft.kk.calc.memory.CalcModel;
 import pl.c2p.jft.kk.calc.ui.CalcWindow;
 
+import java.util.HashMap;
+
 public class CalcController {
-    private CalcModel calcModel;
-    private CalcWindow calcWindow;
+    CalcModel calcModel;
+    CalcWindow calcWindow;
+
+    //    HashMap<String, ClickableCommand> commands = new HashMap<>();
+    HashMap<String, ClickableCommand> keyboard = new HashMap<>();
+
 
     public CalcController(CalcModel calcModel, CalcWindow calcWindow) {
-
         this.calcModel = calcModel;
         this.calcWindow = calcWindow;
+
+        keyboard.put("0", new CommandDigit(this,"0"));
+        keyboard.put("1", new CommandDigit(this,"1"));
+        keyboard.put("2", new CommandDigit(this,"2"));
+        keyboard.put("3", new CommandDigit(this,"3"));
+        keyboard.put("4", new CommandDigit(this,"4"));
+        keyboard.put("5", new CommandDigit(this,"5"));
+        keyboard.put("6", new CommandDigit(this,"6"));
+        keyboard.put("7", new CommandDigit(this,"7"));
+        keyboard.put("8", new CommandDigit(this,"8"));
+        keyboard.put("9", new CommandDigit(this,"9"));
+        keyboard.put("-", new CommandNegate(this));
+        keyboard.put("Clear", new CommandClear(this));
+        keyboard.put("Delete", new CommandDelete(this));
+
     }
 
     public void buttonPressed(String action) {
-
-        if (action.equals("1")) {
-            calcWindow.setDisplay(calcWindow.readDisplay().concat("1"));
-        }
-        if (action.equals("2")) {
-            calcWindow.setDisplay(calcWindow.readDisplay().concat("2"));
-        }
-        if (action.equals("3")) {
-            calcWindow.setDisplay(calcWindow.readDisplay().concat("3"));
-        }
-        if (action.equals("4")) {
-            calcWindow.setDisplay(calcWindow.readDisplay().concat("4"));
-        }
-        if (action.equals("5")) {
-            calcWindow.setDisplay(calcWindow.readDisplay().concat("5"));
-        }
-        if (action.equals("6")) {
-            calcWindow.setDisplay(calcWindow.readDisplay().concat("6"));
-        }
-        if (action.equals("7")) {
-            calcWindow.setDisplay(calcWindow.readDisplay().concat("7"));
-        }
-        if (action.equals("8")) {
-            calcWindow.setDisplay(calcWindow.readDisplay().concat("8"));
-        }
-        if (action.equals("9")) {
-            calcWindow.setDisplay(calcWindow.readDisplay().concat("9"));
-        }
-        if (action.equals("0")) {
-            calcWindow.setDisplay(calcWindow.readDisplay().concat("0"));
+        ClickableCommand command = keyboard.get(action);
+        if (command != null) {
+            command.doClick();
+            return;
         }
         if (action.equals(".")) {
             calcWindow.setDisplay(calcWindow.readDisplay().concat("."));
@@ -100,17 +94,6 @@ public class CalcController {
                     calcModel.result = 0;
             }
             calcWindow.setDisplay("" + calcModel.result);
-        }
-
-        if (action.equals("Clear")) {
-            calcWindow.setDisplay("");
-            calcModel.reset();
-        }
-        if (action.equals("Delete")) {
-            String s = calcWindow.readDisplay();
-            calcWindow.setDisplay("");
-            for (int i = 0; i < s.length() - 1; i++)
-                calcWindow.setDisplay(calcWindow.readDisplay() + s.charAt(i));
         }
     }
 }
