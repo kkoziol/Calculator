@@ -3,11 +3,11 @@ package pl.c2p.jft.kk.calc.controler;
 import pl.c2p.jft.kk.calc.memory.CalcModel;
 import pl.c2p.jft.kk.calc.ui.CalcWindow;
 
-public class CalcControler {
+public class CalcController {
     private CalcModel calcModel;
     private CalcWindow calcWindow;
 
-    public CalcControler(CalcModel calcModel, CalcWindow calcWindow) {
+    public CalcController(CalcModel calcModel, CalcWindow calcWindow) {
 
         this.calcModel = calcModel;
         this.calcWindow = calcWindow;

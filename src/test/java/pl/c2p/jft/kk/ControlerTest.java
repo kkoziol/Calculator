@@ -3,8 +3,7 @@ package pl.c2p.jft.kk;
 import org.junit.Test;
 import org.mockito.InOrder;
 import org.mockito.Mockito;
-import org.mockito.verification.VerificationMode;
-import pl.c2p.jft.kk.calc.controler.CalcControler;
+import pl.c2p.jft.kk.calc.controler.CalcController;
 import pl.c2p.jft.kk.calc.memory.CalcModel;
 import pl.c2p.jft.kk.calc.ui.CalcWindow;
 
@@ -19,12 +18,12 @@ public class ControlerTest
         CalcModel calcModel = new CalcModel();
         CalcWindow calcWindow = spy(CalcWindow.class);
 
-        CalcControler calcControler = new CalcControler(calcModel,calcWindow);
+        CalcController calcController = new CalcController(calcModel,calcWindow);
 
-        calcControler.buttonPressed("1");
-        calcControler.buttonPressed("+");
-        calcControler.buttonPressed("2");
-        calcControler.buttonPressed("=");
+        calcController.buttonPressed("1");
+        calcController.buttonPressed("+");
+        calcController.buttonPressed("2");
+        calcController.buttonPressed("=");
 
         verify(calcWindow).setDisplay("3.0");
 
@@ -34,12 +33,12 @@ public class ControlerTest
     {
         CalcModel calcModel = new CalcModel();
         CalcWindow calcWindow = spy(CalcWindow.class);
-        CalcControler calcControler = new CalcControler(calcModel,calcWindow);
+        CalcController calcController = new CalcController(calcModel,calcWindow);
 
-        calcControler.buttonPressed("4");
-        calcControler.buttonPressed("-");
-        calcControler.buttonPressed("3");
-        calcControler.buttonPressed("=");
+        calcController.buttonPressed("4");
+        calcController.buttonPressed("-");
+        calcController.buttonPressed("3");
+        calcController.buttonPressed("=");
 
         verify(calcWindow).setDisplay("1.0");
 
@@ -49,12 +48,12 @@ public class ControlerTest
     {
         CalcModel calcModel = new CalcModel();
         CalcWindow calcWindow = spy(CalcWindow.class);
-        CalcControler calcControler = new CalcControler(calcModel,calcWindow);
+        CalcController calcController = new CalcController(calcModel,calcWindow);
 
-        calcControler.buttonPressed("5");
-        calcControler.buttonPressed("*");
-        calcControler.buttonPressed("6");
-        calcControler.buttonPressed("=");
+        calcController.buttonPressed("5");
+        calcController.buttonPressed("*");
+        calcController.buttonPressed("6");
+        calcController.buttonPressed("=");
 
         verify(calcWindow).setDisplay("30.0");
 
@@ -64,12 +63,12 @@ public class ControlerTest
     {
         CalcModel calcModel = new CalcModel();
         CalcWindow calcWindow = spy(CalcWindow.class);
-        CalcControler calcControler = new CalcControler(calcModel,calcWindow);
+        CalcController calcController = new CalcController(calcModel,calcWindow);
 
-        calcControler.buttonPressed("8");
-        calcControler.buttonPressed("/");
-        calcControler.buttonPressed("7");
-        calcControler.buttonPressed("=");
+        calcController.buttonPressed("8");
+        calcController.buttonPressed("/");
+        calcController.buttonPressed("7");
+        calcController.buttonPressed("=");
 
         verify(calcWindow,times(4)).setDisplay(anyString());
         verify(calcWindow,atLeast(1)).setDisplay("1.1428571428571428");
@@ -79,12 +78,12 @@ public class ControlerTest
     {
         CalcModel calcModel = new CalcModel();
         CalcWindow calcWindow = spy(CalcWindow.class);
-        CalcControler calcControler = new CalcControler(calcModel,calcWindow);
+        CalcController calcController = new CalcController(calcModel,calcWindow);
 
-        calcControler.buttonPressed("9");
-        calcControler.buttonPressed("/");
-        calcControler.buttonPressed("0");
-        calcControler.buttonPressed("=");
+        calcController.buttonPressed("9");
+        calcController.buttonPressed("/");
+        calcController.buttonPressed("0");
+        calcController.buttonPressed("=");
 
         verify(calcWindow).setDisplay("Error");
     }
@@ -93,12 +92,12 @@ public class ControlerTest
     {
         CalcModel calcModel = new CalcModel();
         CalcWindow calcWindow = spy(CalcWindow.class);
-        CalcControler calcControler = new CalcControler(calcModel,calcWindow);
+        CalcController calcController = new CalcController(calcModel,calcWindow);
 
-        calcControler.buttonPressed("8");
-        calcControler.buttonPressed("/");
-        calcControler.buttonPressed("8");
-        calcControler.buttonPressed("Clear");
+        calcController.buttonPressed("8");
+        calcController.buttonPressed("/");
+        calcController.buttonPressed("8");
+        calcController.buttonPressed("Clear");
 
         verify(calcWindow,times(4)).setDisplay(anyString());
         verify(calcWindow,atLeast(2)).setDisplay("");
@@ -114,11 +113,11 @@ public class ControlerTest
     {
         CalcModel calcModel = new CalcModel();
         CalcWindow calcWindow = spy(CalcWindow.class);
-        CalcControler calcControler = new CalcControler(calcModel,calcWindow);
+        CalcController calcController = new CalcController(calcModel,calcWindow);
 
-        calcControler.buttonPressed("8");
-        calcControler.buttonPressed("7");
-        calcControler.buttonPressed("Delete");
+        calcController.buttonPressed("8");
+        calcController.buttonPressed("7");
+        calcController.buttonPressed("Delete");
 
         InOrder inOrder = Mockito.inOrder(calcWindow);
         inOrder.verify(calcWindow).setDisplay("8");

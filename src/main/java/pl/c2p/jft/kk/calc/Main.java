@@ -1,24 +1,24 @@
 package pl.c2p.jft.kk.calc;
 
-import pl.c2p.jft.kk.calc.controler.CalcControler;
+import pl.c2p.jft.kk.calc.controler.CalcController;
 import pl.c2p.jft.kk.calc.memory.CalcModel;
 import pl.c2p.jft.kk.calc.ui.CalcWindow;
 
 public class Main {
     CalcModel calcModel = new CalcModel();
     CalcWindow calcWindow = new CalcWindow();
-    CalcControler calcControler;
+    CalcController calcController;
 
     public Main() {
-        calcControler = new CalcControler(calcModel, calcWindow);
+        calcController = new CalcController(calcModel, calcWindow);
 
         initialize();
     }
 
-    public Main(CalcModel calcModel, CalcWindow calcWindow, CalcControler calcControler) {
+    public Main(CalcModel calcModel, CalcWindow calcWindow, CalcController calcController) {
         this.calcModel = calcModel;
         this.calcWindow = calcWindow;
-        this.calcControler = calcControler;
+        this.calcController = calcController;
 
         initialize();
     }
@@ -28,6 +28,6 @@ public class Main {
     }
 
     void initialize() {
-        calcWindow.registerObserver(calcControler);
+        calcWindow.registerObserver(calcController);
     }
 }

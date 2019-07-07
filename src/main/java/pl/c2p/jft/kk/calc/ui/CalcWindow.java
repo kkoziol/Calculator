@@ -1,6 +1,6 @@
 package pl.c2p.jft.kk.calc.ui;
 
-import pl.c2p.jft.kk.calc.controler.CalcControler;
+import pl.c2p.jft.kk.calc.controler.CalcController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,7 +13,7 @@ public class CalcWindow implements ActionListener {
     JTextField t;
     JButton b1, b2, b3, b4, b5, b6, b7, b8, b9, b0, bdiv, bmul, bsub, badd, bdec, beq, bdel, bclr;
 
-    private CalcControler calcControler;
+    private CalcController calcController;
 
     public CalcWindow() {
         f = new JFrame("Calculator");
@@ -111,13 +111,13 @@ public class CalcWindow implements ActionListener {
 
     }
 
-    public void registerObserver(CalcControler calcControler) {
-        this.calcControler = calcControler;
+    public void registerObserver(CalcController calcController) {
+        this.calcController = calcController;
     }
 
     public void actionPerformed(ActionEvent e) {
         String action = ((JButton) e.getSource()).getText();
-        calcControler.buttonPressed(action);
+        calcController.buttonPressed(action);
     }
 
     public void setDisplay(String text) {

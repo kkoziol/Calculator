@@ -1,7 +1,7 @@
 package pl.c2p.jft.kk;
 
 import org.junit.Test;
-import pl.c2p.jft.kk.calc.controler.CalcControler;
+import pl.c2p.jft.kk.calc.controler.CalcController;
 import pl.c2p.jft.kk.calc.memory.CalcModel;
 import pl.c2p.jft.kk.calc.ui.CalcWindow;
 
@@ -18,21 +18,21 @@ public class IntegrationTest
         // i ze nie uzywamy modelu do trzymania "wyswietlacza"
         when(calcWindow.readDisplay()).thenReturn("","1","12","12.","12.5");
 
-        CalcControler calcControler = new CalcControler(calcModel,calcWindow);
+        CalcController calcController = new CalcController(calcModel,calcWindow);
 
-        calcControler.buttonPressed("1");
+        calcController.buttonPressed("1");
 
         verify(calcWindow).setDisplay("1");
 
-        calcControler.buttonPressed("2");
+        calcController.buttonPressed("2");
 
         verify(calcWindow).setDisplay("12");
 
-        calcControler.buttonPressed(".");
+        calcController.buttonPressed(".");
 
         verify(calcWindow).setDisplay("12.");
 
-        calcControler.buttonPressed("5");
+        calcController.buttonPressed("5");
 
         verify(calcWindow).setDisplay("12.5");
 
@@ -47,12 +47,12 @@ public class IntegrationTest
         CalcWindow calcWindow = spy(CalcWindow.class);
         //when(calcWindow.readDisplay()).thenReturn("","1","","2");
 
-        CalcControler calcControler = new CalcControler(calcModel,calcWindow);
+        CalcController calcController = new CalcController(calcModel,calcWindow);
 
-        calcControler.buttonPressed("1");
-        calcControler.buttonPressed("+");
-        calcControler.buttonPressed("2");
-        calcControler.buttonPressed("=");
+        calcController.buttonPressed("1");
+        calcController.buttonPressed("+");
+        calcController.buttonPressed("2");
+        calcController.buttonPressed("=");
 
         verify(calcWindow).setDisplay("3.0");
 
@@ -62,12 +62,12 @@ public class IntegrationTest
     {
         CalcModel calcModel = new CalcModel();
         CalcWindow calcWindow = spy(CalcWindow.class);
-        CalcControler calcControler = new CalcControler(calcModel,calcWindow);
+        CalcController calcController = new CalcController(calcModel,calcWindow);
 
-        calcControler.buttonPressed("1");
-        calcControler.buttonPressed("-");
-        calcControler.buttonPressed("2");
-        calcControler.buttonPressed("=");
+        calcController.buttonPressed("1");
+        calcController.buttonPressed("-");
+        calcController.buttonPressed("2");
+        calcController.buttonPressed("=");
 
         verify(calcWindow).setDisplay("-1.0");
 
@@ -77,12 +77,12 @@ public class IntegrationTest
     {
         CalcModel calcModel = new CalcModel();
         CalcWindow calcWindow = spy(CalcWindow.class);
-        CalcControler calcControler = new CalcControler(calcModel,calcWindow);
+        CalcController calcController = new CalcController(calcModel,calcWindow);
 
-        calcControler.buttonPressed("2");
-        calcControler.buttonPressed("*");
-        calcControler.buttonPressed("2");
-        calcControler.buttonPressed("=");
+        calcController.buttonPressed("2");
+        calcController.buttonPressed("*");
+        calcController.buttonPressed("2");
+        calcController.buttonPressed("=");
 
         verify(calcWindow).setDisplay("4.0");
 
@@ -92,12 +92,12 @@ public class IntegrationTest
     {
         CalcModel calcModel = new CalcModel();
         CalcWindow calcWindow = spy(CalcWindow.class);
-        CalcControler calcControler = new CalcControler(calcModel,calcWindow);
+        CalcController calcController = new CalcController(calcModel,calcWindow);
 
-        calcControler.buttonPressed("5");
-        calcControler.buttonPressed("/");
-        calcControler.buttonPressed("2");
-        calcControler.buttonPressed("=");
+        calcController.buttonPressed("5");
+        calcController.buttonPressed("/");
+        calcController.buttonPressed("2");
+        calcController.buttonPressed("=");
 
         verify(calcWindow).setDisplay("2.5");
     }
@@ -106,12 +106,12 @@ public class IntegrationTest
     {
         CalcModel calcModel = new CalcModel();
         CalcWindow calcWindow = spy(CalcWindow.class);
-        CalcControler calcControler = new CalcControler(calcModel,calcWindow);
+        CalcController calcController = new CalcController(calcModel,calcWindow);
 
-        calcControler.buttonPressed("5");
-        calcControler.buttonPressed("/");
-        calcControler.buttonPressed("0");
-        calcControler.buttonPressed("=");
+        calcController.buttonPressed("5");
+        calcController.buttonPressed("/");
+        calcController.buttonPressed("0");
+        calcController.buttonPressed("=");
 
         verify(calcWindow).setDisplay("Error");
     }

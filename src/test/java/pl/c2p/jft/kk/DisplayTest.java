@@ -1,8 +1,7 @@
 package pl.c2p.jft.kk;
 
 import org.junit.Test;
-import pl.c2p.jft.kk.calc.controler.CalcControler;
-import pl.c2p.jft.kk.calc.memory.CalcModel;
+import pl.c2p.jft.kk.calc.controler.CalcController;
 import pl.c2p.jft.kk.calc.ui.CalcWindow;
 
 import javax.swing.*;
@@ -29,13 +28,13 @@ public class DisplayTest
         ActionEvent event = mock(ActionEvent.class);
         when(event.getSource()).thenReturn(new JButton("1"));
 
-        CalcControler calcControler = mock(CalcControler.class);
+        CalcController calcController = mock(CalcController.class);
         CalcWindow calcWindow = new CalcWindow();
-        calcWindow.registerObserver(calcControler);
+        calcWindow.registerObserver(calcController);
 
         calcWindow.actionPerformed(event);
 
-        verify(calcControler).buttonPressed("1");
+        verify(calcController).buttonPressed("1");
     }
 
 
