@@ -1,6 +1,8 @@
 package pl.c2p.jft.kk;
 
 import org.junit.Test;
+import org.mockito.InOrder;
+import org.mockito.Mockito;
 import org.mockito.verification.VerificationMode;
 import pl.c2p.jft.kk.calc.controler.CalcControler;
 import pl.c2p.jft.kk.calc.memory.CalcModel;
@@ -105,6 +107,24 @@ public class ControlerTest
         assertThat(calcModel.b).isEqualTo(0);
         assertThat(calcModel.result).isEqualTo(0);
         assertThat(calcModel.operator).isEqualTo(0);
+    }
+
+    @Test
+    public void shouldDeletaLastCharacter()
+    {
+        CalcModel calcModel = new CalcModel();
+        CalcWindow calcWindow = spy(CalcWindow.class);
+        CalcControler calcControler = new CalcControler(calcModel,calcWindow);
+
+        calcControler.buttonPressed("8");
+        calcControler.buttonPressed("7");
+        calcControler.buttonPressed("Delete");
+
+        InOrder inOrder = Mockito.inOrder(calcWindow);
+        inOrder.verify(calcWindow).setDisplay("8");
+        inOrder.verify(calcWindow).setDisplay("87");
+        inOrder.verify(calcWindow).setDisplay("8");
+
     }
 
 }
