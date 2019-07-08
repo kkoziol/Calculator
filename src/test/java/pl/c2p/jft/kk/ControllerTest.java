@@ -1,6 +1,8 @@
 package pl.c2p.jft.kk;
 
-import org.junit.Test;
+import org.junit.*;
+import org.junit.runner.RunWith;
+import org.junit.runners.MethodSorters;
 import org.mockito.InOrder;
 import org.mockito.Mockito;
 import pl.c2p.jft.kk.calc.controler.CalcController;
@@ -10,31 +12,34 @@ import pl.c2p.jft.kk.calc.ui.CalcWindow;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 
-public class ControlerTest
-{
+public class ControllerTest {
+
+    CalcModel calcModel;
+    CalcWindow calcWindow;
+    CalcController calcController;
+
+
+    @Before
+    public void setup() {
+        calcModel = spy(new CalcModel());
+        calcWindow = spy(new CalcWindow());
+        calcController = new CalcController(calcModel, calcWindow);
+        calcWindow.registerObserver(calcController);
+    }
+
     @Test
-    public void shouldAdd()
-    {
-        CalcModel calcModel = new CalcModel();
-        CalcWindow calcWindow = spy(CalcWindow.class);
-
-        CalcController calcController = new CalcController(calcModel,calcWindow);
-
+    public void shouldAdd() {
         calcController.buttonPressed("1");
         calcController.buttonPressed("+");
         calcController.buttonPressed("2");
         calcController.buttonPressed("=");
 
         verify(calcWindow).setDisplay("3.0");
-
+        assertThat(calcWindow.readDisplay()).isEqualTo("3.0");
     }
-    @Test
-    public void shouldSubstract()
-    {
-        CalcModel calcModel = new CalcModel();
-        CalcWindow calcWindow = spy(CalcWindow.class);
-        CalcController calcController = new CalcController(calcModel,calcWindow);
 
+    @Test
+    public void shouldSubstract() {
         calcController.buttonPressed("4");
         calcController.buttonPressed("-");
         calcController.buttonPressed("3");
@@ -43,13 +48,9 @@ public class ControlerTest
         verify(calcWindow).setDisplay("1.0");
 
     }
-    @Test
-    public void shouldMultiply()
-    {
-        CalcModel calcModel = new CalcModel();
-        CalcWindow calcWindow = spy(CalcWindow.class);
-        CalcController calcController = new CalcController(calcModel,calcWindow);
 
+    @Test
+    public void shouldMultiply() {
         calcController.buttonPressed("5");
         calcController.buttonPressed("*");
         calcController.buttonPressed("6");
@@ -58,27 +59,23 @@ public class ControlerTest
         verify(calcWindow).setDisplay("30.0");
 
     }
-    @Test
-    public void shouldDivide()
-    {
-        CalcModel calcModel = new CalcModel();
-        CalcWindow calcWindow = spy(CalcWindow.class);
-        CalcController calcController = new CalcController(calcModel,calcWindow);
 
+    @Test
+    public void shouldDivide() {
         calcController.buttonPressed("8");
         calcController.buttonPressed("/");
         calcController.buttonPressed("7");
         calcController.buttonPressed("=");
 
-        verify(calcWindow,times(4)).setDisplay(anyString());
-        verify(calcWindow,atLeast(1)).setDisplay("1.1428571428571428");
+        verify(calcWindow, times(4)).setDisplay(anyString());
+        verify(calcWindow, atLeast(1)).setDisplay("1.1428571428571428");
     }
+
     @Test
-    public void shouldNotDivideByZero()
-    {
+    public void shouldNotDivideByZero() {
         CalcModel calcModel = new CalcModel();
-        CalcWindow calcWindow = spy(CalcWindow.class);
-        CalcController calcController = new CalcController(calcModel,calcWindow);
+        CalcWindow calcWindow = spy(new CalcWindow());
+        CalcController calcController = new CalcController(calcModel, calcWindow);
 
         calcController.buttonPressed("9");
         calcController.buttonPressed("/");
@@ -87,34 +84,30 @@ public class ControlerTest
 
         verify(calcWindow).setDisplay("Error");
     }
-    @Test
-    public void shouldClearStateAndDisplay()
-    {
-        CalcModel calcModel = new CalcModel();
-        CalcWindow calcWindow = spy(CalcWindow.class);
-        CalcController calcController = new CalcController(calcModel,calcWindow);
 
+    @Test
+    public void shouldClearStateAndDisplay() {
         calcController.buttonPressed("8");
         calcController.buttonPressed("/");
         calcController.buttonPressed("8");
+
+        assertThat(calcWindow.readDisplay()).isEqualTo("8");
+
         calcController.buttonPressed("Clear");
 
         verify(calcWindow,times(4)).setDisplay(anyString());
+        verify(calcWindow,atLeast(2)).setDisplay("8");
         verify(calcWindow,atLeast(2)).setDisplay("");
 
         assertThat(calcModel.a).isEqualTo(0);
         assertThat(calcModel.b).isEqualTo(0);
         assertThat(calcModel.result).isEqualTo(0);
-        assertThat(calcModel.operator).isEqualTo(0);
+        assertThat(calcModel.getOperator()).isEqualTo("");
+
     }
 
     @Test
-    public void shouldDeleteLastCharacter()
-    {
-        CalcModel calcModel = new CalcModel();
-        CalcWindow calcWindow = spy(CalcWindow.class);
-        CalcController calcController = new CalcController(calcModel,calcWindow);
-
+    public void shouldDeleteLastCharacter() {
         calcController.buttonPressed("8");
         calcController.buttonPressed("7");
         calcController.buttonPressed("Delete");
@@ -123,16 +116,10 @@ public class ControlerTest
         inOrder.verify(calcWindow).setDisplay("8");
         inOrder.verify(calcWindow).setDisplay("87");
         inOrder.verify(calcWindow).setDisplay("8");
-
     }
 
     @Test
-    public void shouldBePossibleToUseNegativeNumbers ()
-    {
-        CalcModel calcModel = new CalcModel();
-        CalcWindow calcWindow = spy(CalcWindow.class);
-        CalcController calcController = new CalcController(calcModel,calcWindow);
-
+    public void shouldBePossibleToUseNegativeNumbers() {
         calcController.buttonPressed("-");
         calcController.buttonPressed("7");
 

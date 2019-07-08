@@ -1,7 +1,5 @@
 package pl.c2p.jft.kk.calc.controler;
 
-import pl.c2p.jft.kk.calc.controler.ClickableCommand;
-
 class CommandClear implements ClickableCommand {
     private CalcController controller;
 

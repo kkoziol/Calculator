@@ -12,6 +12,7 @@ class CommandDigit implements ClickableCommand {
 
     @Override
     public void doClick() {
+        System.out.println(digit);
         controller.calcWindow.setDisplay(controller.calcWindow.readDisplay().concat(digit));
     }
 }

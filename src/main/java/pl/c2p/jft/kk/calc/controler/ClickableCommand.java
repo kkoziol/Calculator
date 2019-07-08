@@ -1,5 +1,5 @@
 package pl.c2p.jft.kk.calc.controler;
 
-interface ClickableCommand {
+public interface ClickableCommand {
     void doClick();
 }
