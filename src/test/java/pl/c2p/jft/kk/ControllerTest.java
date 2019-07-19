@@ -424,6 +424,33 @@ public class ControllerTest {
 
         inOrder.verify(calcWindow).setDisplay("1");
         inOrder.verify(calcWindow).setDisplay("3.0");
+    }
+    @Test
+    public void shouldStartFromBeginingAfterDigitClicked() {
+        calcController.buttonPressed("1");
+        calcController.buttonPressed("+");
+
+        calcController.buttonPressed("1");
+        calcController.buttonPressed("=");
+
+        calcController.buttonPressed("2");
+        calcController.buttonPressed("+");
+
+        calcController.buttonPressed("2");
+        calcController.buttonPressed("=");
+
+
+        InOrder inOrder = Mockito.inOrder(calcWindow);
+        inOrder.verify(calcWindow).setDisplay("1");
+        inOrder.verify(calcWindow).setDisplay("");
+        inOrder.verify(calcWindow).setDisplay("1");
+        inOrder.verify(calcWindow).setDisplay("2.0");
+
+        inOrder.verify(calcWindow).setDisplay("");
+        inOrder.verify(calcWindow).setDisplay("2");
+        inOrder.verify(calcWindow).setDisplay("");
+        inOrder.verify(calcWindow).setDisplay("2");
+        inOrder.verify(calcWindow).setDisplay("4.0");
 
     }
 }

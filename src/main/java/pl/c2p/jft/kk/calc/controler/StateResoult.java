@@ -31,6 +31,7 @@ public class StateResoult extends State {
 
     @Override
     protected State stateAfterDecimalClicked() {
+        //tu jest lipa ofcourse
         return this;
     }
 
