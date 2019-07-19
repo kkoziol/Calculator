@@ -21,7 +21,7 @@ public class StateResoult extends State {
         keyboard.put("/", commands.get("/"));
         keyboard.put("=", commands.get(""));
         keyboard.put("Clear", commands.get("Clear"));
-        keyboard.put("Delete", commands.get(""));
+        keyboard.put("Delete", commands.get("Clear"));
     }
 
     @Override
@@ -31,7 +31,6 @@ public class StateResoult extends State {
 
     @Override
     protected State stateAfterDecimalClicked() {
-        //jednak ok :)
         return this;
     }
 
@@ -62,8 +61,7 @@ public class StateResoult extends State {
 
     @Override
     protected State stateAfterDeleteClicked() {
-        //A tu nie koniecnie ok.
-        return this;
+        return calcController.getState(States.FirstEmpty);
     }
 
     @Override
