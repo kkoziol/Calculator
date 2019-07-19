@@ -60,8 +60,12 @@ public class StateSecondIntegral extends State {
 
     @Override
     protected State stateAfterDeleteClicked() {
-        return calcController.getState(States.SecondEmpty);
-        //TODO: albo this itp
+        String display = calcController.calcWindow.readDisplay();
+        if (display.length() > 0) {
+            return this;
+        } else {
+            return calcController.getState(States.SecondEmpty);
+        }
     }
 
     @Override

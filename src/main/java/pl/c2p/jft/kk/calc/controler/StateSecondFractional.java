@@ -60,8 +60,13 @@ public class StateSecondFractional extends State {
 
     @Override
     protected State stateAfterDeleteClicked() {
-        return calcController.getState(States.SecondIntegral);
-        //TODO: albo cos innego
+        String display = calcController.calcWindow.readDisplay();
+        int indexOfDot = display.indexOf(".");
+        if (indexOfDot >= 0) {
+            return this;
+        } else {
+            return calcController.getState(States.SecondIntegral);
+        }
     }
 
     @Override

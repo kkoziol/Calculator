@@ -60,8 +60,17 @@ public class StateSecondNegativeIntegral extends State {
 
     @Override
     protected State stateAfterDeleteClicked() {
-        return calcController.getState(States.SecondNegativeEmpty);
-        //TODO: albo cos innego
+        String display = calcController.calcWindow.readDisplay();
+        int indexOfDot = display.indexOf("-");
+        if (indexOfDot == 0) {
+            if (display.length() > 1) {
+                return this;
+            } else {
+                return calcController.getState(States.SecondNegativeEmpty);
+            }
+        } else {
+            return calcController.getState(States.SecondEmpty);
+        }
     }
 
     @Override
