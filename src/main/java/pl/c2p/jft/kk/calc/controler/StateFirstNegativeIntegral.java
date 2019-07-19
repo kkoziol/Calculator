@@ -60,8 +60,17 @@ public class StateFirstNegativeIntegral extends State {
 
     @Override
     protected State stateAfterDeleteClicked() {
-        return calcController.getState(States.FirstNegativeEmpty);
-        //TODO: albo this
+        String display = calcController.calcWindow.readDisplay();
+        int indexOfDot = display.indexOf("-");
+        if (indexOfDot == 0) {
+            if (display.length() > 1) {
+                return this;
+            } else {
+                return calcController.getState(States.FirstNegativeEmpty);
+            }
+        } else {
+            return calcController.getState(States.FirstEmpty);
+        }
     }
 
     @Override

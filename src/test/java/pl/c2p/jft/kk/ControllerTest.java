@@ -1,8 +1,7 @@
 package pl.c2p.jft.kk;
 
-import org.junit.*;
-import org.junit.runner.RunWith;
-import org.junit.runners.MethodSorters;
+import org.junit.Before;
+import org.junit.Test;
 import org.mockito.InOrder;
 import org.mockito.Mockito;
 import pl.c2p.jft.kk.calc.controler.CalcController;
@@ -150,7 +149,7 @@ public class ControllerTest {
 
 
     @Test
-    public void shouldChangeStateToXXXAfterDeletion() {
+    public void shouldChangeStateToFirstEmptyAfterAllDeletions() {
         calcController.buttonPressed("-");
         calcController.buttonPressed("7");
         calcController.buttonPressed(".");
@@ -168,6 +167,40 @@ public class ControllerTest {
         inOrder.verify(calcWindow).setDisplay("");
         inOrder.verify(calcWindow).setDisplay("-");
 
+    }
+
+    @Test
+    public void shouldChangeStateToNegativeIntegralAfterDeletions() {
+        calcController.buttonPressed("-");
+        calcController.buttonPressed("7");
+        calcController.buttonPressed(".");
+        calcController.buttonPressed("Delete");
+        calcController.buttonPressed(".");
+
+        InOrder inOrder = Mockito.inOrder(calcWindow);
+        inOrder.verify(calcWindow).setDisplay("-");
+        inOrder.verify(calcWindow).setDisplay("-7");
+        inOrder.verify(calcWindow).setDisplay("-7.");
+        inOrder.verify(calcWindow).setDisplay("-7");
+        inOrder.verify(calcWindow).setDisplay("-7.");
+
+    }
+    @Test
+    public void shouldChangeStateToFirstNegativeEmptyAfterAllDeletions() {
+        calcController.buttonPressed("-");
+        calcController.buttonPressed("7");
+        calcController.buttonPressed(".");
+        calcController.buttonPressed("Delete");
+        calcController.buttonPressed("Delete");
+        calcController.buttonPressed("-");
+
+        InOrder inOrder = Mockito.inOrder(calcWindow);
+        inOrder.verify(calcWindow).setDisplay("-");
+        inOrder.verify(calcWindow).setDisplay("-7");
+        inOrder.verify(calcWindow).setDisplay("-7.");
+        inOrder.verify(calcWindow).setDisplay("-7");
+        inOrder.verify(calcWindow).setDisplay("-");
+        inOrder.verify(calcWindow, times(0)).setDisplay("-");
     }
 
 
