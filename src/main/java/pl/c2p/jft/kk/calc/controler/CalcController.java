@@ -1,6 +1,5 @@
 package pl.c2p.jft.kk.calc.controler;
 
-import pl.c2p.jft.kk.calc.controler.states.State;
 import pl.c2p.jft.kk.calc.memory.CalcModel;
 import pl.c2p.jft.kk.calc.ui.CalcWindow;
 
