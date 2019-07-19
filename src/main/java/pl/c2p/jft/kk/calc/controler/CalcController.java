@@ -19,6 +19,7 @@ public class CalcController {
 
         commands.put("", new CommandDoNothing(this));
         commands.put("!", new CommandNegate(this));
+        commands.put("c!", new CommandClearDecorator(this, new CommandNegate(this)));
         commands.put(".", new CommandDecimalPoint(this));
         commands.put("0", new CommandDigit(this, "0"));
         commands.put("1", new CommandDigit(this, "1"));
@@ -30,6 +31,16 @@ public class CalcController {
         commands.put("7", new CommandDigit(this, "7"));
         commands.put("8", new CommandDigit(this, "8"));
         commands.put("9", new CommandDigit(this, "9"));
+        commands.put("c0", new CommandClearDecorator(this, new CommandDigit(this, "0")));
+        commands.put("c1", new CommandClearDecorator(this, new CommandDigit(this, "1")));
+        commands.put("c2", new CommandClearDecorator(this, new CommandDigit(this, "2")));
+        commands.put("c3", new CommandClearDecorator(this, new CommandDigit(this, "3")));
+        commands.put("c4", new CommandClearDecorator(this, new CommandDigit(this, "4")));
+        commands.put("c5", new CommandClearDecorator(this, new CommandDigit(this, "5")));
+        commands.put("c6", new CommandClearDecorator(this, new CommandDigit(this, "6")));
+        commands.put("c7", new CommandClearDecorator(this, new CommandDigit(this, "7")));
+        commands.put("c8", new CommandClearDecorator(this, new CommandDigit(this, "8")));
+        commands.put("c9", new CommandClearDecorator(this, new CommandDigit(this, "9")));
         commands.put("+", new CommandAdd(this));
         commands.put("-", new CommandSubstract(this));
         commands.put("*", new CommandMultiply(this));
