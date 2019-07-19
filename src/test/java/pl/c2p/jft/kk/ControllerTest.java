@@ -38,6 +38,23 @@ public class ControllerTest {
     }
 
     @Test
+    public void shouldAddWithIgnoreSecondPlusClick() {
+        calcController.buttonPressed("1");
+        calcController.buttonPressed(".");
+        calcController.buttonPressed("1");
+        calcController.buttonPressed("+");
+        calcController.buttonPressed("+");
+        calcController.buttonPressed("2");
+        calcController.buttonPressed(".");
+        calcController.buttonPressed("1");
+
+        calcController.buttonPressed("=");
+
+        verify(calcWindow).setDisplay("3.2");
+        assertThat(calcWindow.readDisplay()).isEqualTo("3.2");
+    }
+
+    @Test
     public void shouldSubstract() {
         calcController.buttonPressed("4");
         calcController.buttonPressed("-");
@@ -46,6 +63,24 @@ public class ControllerTest {
 
         verify(calcWindow).setDisplay("1.0");
 
+    }
+
+    @Test
+    public void shouldSubstractWithIgnoreSecondPlusClick() {
+        calcController.buttonPressed("1");
+        calcController.buttonPressed(".");
+        calcController.buttonPressed("1");
+        calcController.buttonPressed("-");
+        calcController.buttonPressed("+");
+        calcController.buttonPressed("-");
+        calcController.buttonPressed("2");
+        calcController.buttonPressed(".");
+        calcController.buttonPressed("1");
+
+        calcController.buttonPressed("=");
+
+        verify(calcWindow).setDisplay("3.2");
+        assertThat(calcWindow.readDisplay()).isEqualTo("3.2");
     }
 
     @Test

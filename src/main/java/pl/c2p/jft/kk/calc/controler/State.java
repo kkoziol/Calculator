@@ -42,6 +42,7 @@ public abstract class State {
                     return stateAfterDigitClicked();
             }
         } else {
+            //Aktualnie to jest nie osiagalne, musial bybyc blad w programie...
             return this;
         }
     }

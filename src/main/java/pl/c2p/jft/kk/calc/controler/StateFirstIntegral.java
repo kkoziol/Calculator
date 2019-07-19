@@ -60,9 +60,12 @@ public class StateFirstIntegral extends State {
 
     @Override
     protected State stateAfterDeleteClicked() {
-        return this;
-        //return States.FirstEmpty.getInstance();
-        //TODO: Zaleznie co tam zostało po skasowaniu!
+        String display = calcController.calcWindow.readDisplay();
+        if (display.length() > 0) {
+            return this;
+        } else {
+            return calcController.getState(States.FirstEmpty);
+        }
     }
 
     @Override

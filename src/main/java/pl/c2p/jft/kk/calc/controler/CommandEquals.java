@@ -34,9 +34,6 @@ public class CommandEquals implements ClickableCommand {
                 }
                 controller.calcModel.result = controller.calcModel.a / controller.calcModel.b;
                 break;
-
-            default:
-                controller.calcModel.result = 0;
         }
         controller.calcWindow.setDisplay("" + controller.calcModel.result);
         controller.calcModel.reset();

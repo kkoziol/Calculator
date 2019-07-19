@@ -60,8 +60,13 @@ public class StateFirstFractional extends State {
 
     @Override
     protected State stateAfterDeleteClicked() {
-        return calcController.getState(States.FirstFractional);
-        //TODO: moze byc zmiana stanu
+        String display = calcController.calcWindow.readDisplay();
+        int indexOfDot = display.indexOf(".");
+        if (indexOfDot >= 0) {
+            return this;
+        } else {
+            return calcController.getState(States.FirstIntegral);
+        }
     }
 
     @Override
