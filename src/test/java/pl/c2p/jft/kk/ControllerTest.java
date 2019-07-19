@@ -220,6 +220,7 @@ public class ControllerTest {
         inOrder.verify(calcWindow).setDisplay("-7.");
 
     }
+
     @Test
     public void shouldChangeStateToFirstNegativeEmptyAfterAllDeletions() {
         calcController.buttonPressed("-");
@@ -239,10 +240,7 @@ public class ControllerTest {
     }
 
 
-
-
-
-
+    // Tests for second number
 
 
     @Test
@@ -352,6 +350,7 @@ public class ControllerTest {
         inOrder.verify(calcWindow).setDisplay("-7.");
 
     }
+
     @Test
     public void shouldChangeStateToSecondNegativeEmptyAfterAllDeletions() {
         calcController.buttonPressed("1");
@@ -376,4 +375,55 @@ public class ControllerTest {
         inOrder.verify(calcWindow, times(0)).setDisplay("-");
     }
 
+
+    // Behavior after result displayed
+
+    @Test
+    public void shouldAddAgain() {
+        calcController.buttonPressed("1");
+        calcController.buttonPressed("+");
+
+        calcController.buttonPressed("-");
+        calcController.buttonPressed("7");
+        calcController.buttonPressed("=");
+        calcController.buttonPressed("+");
+        calcController.buttonPressed("1");
+        calcController.buttonPressed("=");
+
+        InOrder inOrder = Mockito.inOrder(calcWindow);
+        inOrder.verify(calcWindow).setDisplay("1");
+        inOrder.verify(calcWindow).setDisplay("");
+
+        inOrder.verify(calcWindow).setDisplay("-");
+        inOrder.verify(calcWindow).setDisplay("-7");
+
+        inOrder.verify(calcWindow).setDisplay("-6.0");
+        inOrder.verify(calcWindow).setDisplay("");
+        inOrder.verify(calcWindow).setDisplay("1");
+
+        inOrder.verify(calcWindow).setDisplay("-5.0");
+    }
+
+    @Test
+    public void shouldAddAndAddAgain() {
+        calcController.buttonPressed("1");
+        calcController.buttonPressed("+");
+
+        calcController.buttonPressed("1");
+        calcController.buttonPressed("+");
+
+        calcController.buttonPressed("1");
+        calcController.buttonPressed("=");
+
+        InOrder inOrder = Mockito.inOrder(calcWindow);
+        inOrder.verify(calcWindow).setDisplay("1");
+        inOrder.verify(calcWindow).setDisplay("");
+
+        inOrder.verify(calcWindow).setDisplay("1");
+        inOrder.verify(calcWindow).setDisplay("2.0");
+
+        inOrder.verify(calcWindow).setDisplay("1");
+        inOrder.verify(calcWindow).setDisplay("3.0");
+
+    }
 }
