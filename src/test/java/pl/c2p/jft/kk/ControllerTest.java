@@ -453,4 +453,21 @@ public class ControllerTest {
         inOrder.verify(calcWindow).setDisplay("4.0");
 
     }
+    @Test
+    public void shouldClearAfterDeleteClicked() {
+        calcController.buttonPressed("1");
+        calcController.buttonPressed("+");
+        calcController.buttonPressed("1");
+        calcController.buttonPressed("=");
+        calcController.buttonPressed("Delete");
+
+
+        InOrder inOrder = Mockito.inOrder(calcWindow);
+        inOrder.verify(calcWindow).setDisplay("1");
+        inOrder.verify(calcWindow).setDisplay("");
+        inOrder.verify(calcWindow).setDisplay("1");
+        inOrder.verify(calcWindow).setDisplay("2.0");
+
+        inOrder.verify(calcWindow).setDisplay("");
+    }
 }

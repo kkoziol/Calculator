@@ -31,7 +31,7 @@ public class StateResoult extends State {
 
     @Override
     protected State stateAfterDecimalClicked() {
-        //tu jest lipa ofcourse
+        //jednak ok :)
         return this;
     }
 
@@ -62,6 +62,7 @@ public class StateResoult extends State {
 
     @Override
     protected State stateAfterDeleteClicked() {
+        //A tu nie koniecnie ok.
         return this;
     }
 
