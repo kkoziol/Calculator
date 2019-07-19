@@ -239,4 +239,141 @@ public class ControllerTest {
     }
 
 
+
+
+
+
+
+
+    @Test
+    public void shouldDeleteLastCharacterinSecondNumber() {
+        calcController.buttonPressed("1");
+        calcController.buttonPressed("+");
+
+        calcController.buttonPressed("8");
+        calcController.buttonPressed("7");
+        calcController.buttonPressed("Delete");
+
+        InOrder inOrder = Mockito.inOrder(calcWindow);
+        inOrder.verify(calcWindow).setDisplay("1");
+        inOrder.verify(calcWindow).setDisplay("");
+        inOrder.verify(calcWindow).setDisplay("8");
+        inOrder.verify(calcWindow).setDisplay("87");
+        inOrder.verify(calcWindow).setDisplay("8");
+    }
+
+    @Test
+    public void shouldBePossibleToUseNegativeDigitsInSecondNumber() {
+        calcController.buttonPressed("1");
+        calcController.buttonPressed("-");
+
+        calcController.buttonPressed("-");
+        calcController.buttonPressed("7");
+
+        InOrder inOrder = Mockito.inOrder(calcWindow);
+        inOrder.verify(calcWindow).setDisplay("1");
+        inOrder.verify(calcWindow).setDisplay("");
+        inOrder.verify(calcWindow).setDisplay("-");
+        inOrder.verify(calcWindow).setDisplay("-7");
+
+    }
+
+    @Test
+    public void shouldChangeStateToSecondIntegralAfterDeletion() {
+        calcController.buttonPressed("1");
+        calcController.buttonPressed("*");
+
+        calcController.buttonPressed("7");
+        calcController.buttonPressed(".");
+        calcController.buttonPressed("7");
+        calcController.buttonPressed("Delete");
+        calcController.buttonPressed("Delete");
+        calcController.buttonPressed(".");
+
+        InOrder inOrder = Mockito.inOrder(calcWindow);
+        inOrder.verify(calcWindow).setDisplay("1");
+        inOrder.verify(calcWindow).setDisplay("");
+
+        inOrder.verify(calcWindow).setDisplay("7");
+        inOrder.verify(calcWindow).setDisplay("7.");
+        inOrder.verify(calcWindow).setDisplay("7.7");
+        inOrder.verify(calcWindow).setDisplay("7.");
+        inOrder.verify(calcWindow).setDisplay("7");
+        inOrder.verify(calcWindow).setDisplay("7.");
+
+    }
+
+    @Test
+    public void shouldChangeStateToSecondEmptyAfterAllDeletions() {
+        calcController.buttonPressed("1");
+        calcController.buttonPressed("/");
+
+        calcController.buttonPressed("-");
+        calcController.buttonPressed("7");
+        calcController.buttonPressed(".");
+        calcController.buttonPressed("Delete");
+        calcController.buttonPressed("Delete");
+        calcController.buttonPressed("Delete");
+        calcController.buttonPressed("-");
+
+        InOrder inOrder = Mockito.inOrder(calcWindow);
+        inOrder.verify(calcWindow).setDisplay("1");
+        inOrder.verify(calcWindow).setDisplay("");
+
+        inOrder.verify(calcWindow).setDisplay("-");
+        inOrder.verify(calcWindow).setDisplay("-7");
+        inOrder.verify(calcWindow).setDisplay("-7.");
+        inOrder.verify(calcWindow).setDisplay("-7");
+        inOrder.verify(calcWindow).setDisplay("-");
+        inOrder.verify(calcWindow).setDisplay("");
+        inOrder.verify(calcWindow).setDisplay("-");
+
+    }
+
+    @Test
+    public void shouldChangeStateToSecondNegativeIntegralAfterDeletions() {
+        calcController.buttonPressed("1");
+        calcController.buttonPressed("*");
+
+        calcController.buttonPressed("-");
+        calcController.buttonPressed("7");
+        calcController.buttonPressed(".");
+        calcController.buttonPressed("Delete");
+        calcController.buttonPressed(".");
+
+        InOrder inOrder = Mockito.inOrder(calcWindow);
+        inOrder.verify(calcWindow).setDisplay("1");
+        inOrder.verify(calcWindow).setDisplay("");
+
+        inOrder.verify(calcWindow).setDisplay("-");
+        inOrder.verify(calcWindow).setDisplay("-7");
+        inOrder.verify(calcWindow).setDisplay("-7.");
+        inOrder.verify(calcWindow).setDisplay("-7");
+        inOrder.verify(calcWindow).setDisplay("-7.");
+
+    }
+    @Test
+    public void shouldChangeStateToSecondNegativeEmptyAfterAllDeletions() {
+        calcController.buttonPressed("1");
+        calcController.buttonPressed("+");
+
+        calcController.buttonPressed("-");
+        calcController.buttonPressed("7");
+        calcController.buttonPressed(".");
+        calcController.buttonPressed("Delete");
+        calcController.buttonPressed("Delete");
+        calcController.buttonPressed("-");
+
+        InOrder inOrder = Mockito.inOrder(calcWindow);
+        inOrder.verify(calcWindow).setDisplay("1");
+        inOrder.verify(calcWindow).setDisplay("");
+
+        inOrder.verify(calcWindow).setDisplay("-");
+        inOrder.verify(calcWindow).setDisplay("-7");
+        inOrder.verify(calcWindow).setDisplay("-7.");
+        inOrder.verify(calcWindow).setDisplay("-7");
+        inOrder.verify(calcWindow).setDisplay("-");
+        inOrder.verify(calcWindow, times(0)).setDisplay("-");
+    }
+
 }
