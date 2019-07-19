@@ -11,7 +11,6 @@ class CommandDelete implements ClickableCommand {
     @Override
     public void doClick() {
         String s = controller.calcWindow.readDisplay();
-        controller.calcWindow.setDisplay("");
         StringBuilder sb = new StringBuilder();
         String toDisplay = s.substring(0, s.length() - 1);
         controller.calcWindow.setDisplay(toDisplay);
