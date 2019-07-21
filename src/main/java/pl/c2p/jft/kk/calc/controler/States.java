@@ -78,6 +78,12 @@ public enum States {
         public State getInstance(CalcController controller) {
             return controller.states.computeIfAbsent(this.name(), k -> new StateResoult(controller));
         }
+    },
+    TemporaryResoult {
+        @Override
+        public State getInstance(CalcController controller) {
+            return controller.states.computeIfAbsent(this.name(), k -> new StateTemporaryResoult(controller));
+        }
     };
 
 

@@ -2,7 +2,7 @@ package pl.c2p.jft.kk.calc.memory;
 
 public class CalcModel {
 
-    public double a = 0, b = 0;
+    private double a = 0, b = 0;
     public double result;
 
     private boolean firstOperand;
@@ -26,13 +26,21 @@ public class CalcModel {
     public boolean isSecondOperand() {
         return secondOperand;
     }
-
-    public void setFirstOperand(boolean firstOperand) {
-        this.firstOperand = firstOperand;
+    public double getFirstOperand() {
+        return a;
     }
 
-    public void setSecondOperand(boolean secondOperand) {
-        this.secondOperand = secondOperand;
+    public void setFirstOperand(double a) {
+        this.firstOperand = true;
+        this.a = a;
+    }
+    public double getSecondOperand() {
+        return b;
+    }
+
+    public void setSecondOperand(double b) {
+        this.secondOperand = true;
+        this.b = b;
     }
 
     public String getOperator() {
@@ -41,5 +49,9 @@ public class CalcModel {
 
     public void setOperator(String operator) {
         this.operator = operator;
+    }
+
+    public double getResult() {
+        return result;
     }
 }

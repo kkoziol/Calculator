@@ -11,9 +11,8 @@ public class CommandAdd implements ClickableCommand {
     @Override
     public void doClick() {
         System.out.println("+");
-        controller.calcModel.a = Double.parseDouble(controller.calcWindow.readDisplay());
+        controller.calcModel.setFirstOperand(Double.parseDouble(controller.calcWindow.readDisplay()));
         controller.calcModel.setOperator("+");
         controller.calcWindow.setDisplay("");
-
     }
 }

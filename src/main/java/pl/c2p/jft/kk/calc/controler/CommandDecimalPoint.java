@@ -10,6 +10,7 @@ class CommandDecimalPoint implements ClickableCommand {
 
     @Override
     public void doClick() {
+        System.out.println(".");
         controller.calcWindow.setDisplay(controller.calcWindow.readDisplay().concat("."));
     }
 }

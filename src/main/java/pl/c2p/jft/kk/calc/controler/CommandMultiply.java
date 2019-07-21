@@ -9,8 +9,8 @@ public class CommandMultiply implements ClickableCommand {
 
     @Override
     public void doClick() {
-        System.out.println("klikaj");
-        controller.calcModel.a = Double.parseDouble(controller.calcWindow.readDisplay());
+        System.out.println("*");
+        controller.calcModel.setFirstOperand(Double.parseDouble(controller.calcWindow.readDisplay()));
         controller.calcModel.setOperator("*");
         controller.calcWindow.setDisplay("");
     }

@@ -12,30 +12,29 @@ public class CommandEquals implements ClickableCommand {
     @Override
     public void doClick() {
         System.out.println("=");
-        controller.calcModel.b = Double.parseDouble(controller.calcWindow.readDisplay());
+        controller.calcModel.setSecondOperand(Double.parseDouble(controller.calcWindow.readDisplay()));
 
         switch (controller.calcModel.getOperator()) {
             case "+":
-                controller.calcModel.result = controller.calcModel.a + controller.calcModel.b;
+                controller.calcModel.result = controller.calcModel.getFirstOperand() + controller.calcModel.getSecondOperand();
                 break;
 
             case "-":
-                controller.calcModel.result = controller.calcModel.a - controller.calcModel.b;
+                controller.calcModel.result = controller.calcModel.getFirstOperand() - controller.calcModel.getSecondOperand();
                 break;
 
             case "*":
-                controller.calcModel.result = controller.calcModel.a * controller.calcModel.b;
+                controller.calcModel.result = controller.calcModel.getFirstOperand() * controller.calcModel.getSecondOperand();
                 break;
 
             case "/":
-                if (controller.calcModel.b == 0) {
+                if (controller.calcModel.getSecondOperand() == 0) {
                     controller.calcWindow.setDisplay("Error");
                     return;
                 }
-                controller.calcModel.result = controller.calcModel.a / controller.calcModel.b;
+                controller.calcModel.result = controller.calcModel.getFirstOperand() / controller.calcModel.getSecondOperand();
                 break;
         }
         controller.calcWindow.setDisplay("" + controller.calcModel.result);
-        controller.calcModel.reset();
     }
 }

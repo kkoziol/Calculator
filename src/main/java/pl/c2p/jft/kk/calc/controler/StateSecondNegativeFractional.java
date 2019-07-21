@@ -14,10 +14,10 @@ public class StateSecondNegativeFractional extends State {
         keyboard.put("7", commands.get("7"));
         keyboard.put("8", commands.get("8"));
         keyboard.put("9", commands.get("9"));
-        keyboard.put("+", commands.get("+"));
-        keyboard.put("-", commands.get("-"));
-        keyboard.put("*", commands.get("*"));
-        keyboard.put("/", commands.get("/"));
+        keyboard.put("+", commands.get("r+"));
+        keyboard.put("-", commands.get("r-"));
+        keyboard.put("*", commands.get("r*"));
+        keyboard.put("/", commands.get("r/"));
         keyboard.put("=", commands.get("="));
         keyboard.put("Clear", commands.get("Clear"));
         keyboard.put("Delete", commands.get("Delete"));
@@ -25,7 +25,7 @@ public class StateSecondNegativeFractional extends State {
 
     @Override
     protected State stateAfterMinusClicked() {
-        return calcController.getState(States.Resoult);
+        return calcController.getState(States.TemporaryResoult);
     }
 
     @Override
@@ -35,17 +35,17 @@ public class StateSecondNegativeFractional extends State {
 
     @Override
     protected State stateAfterPlusClicked() {
-        return calcController.getState(States.Resoult);
+        return calcController.getState(States.TemporaryResoult);
     }
 
     @Override
     protected State stateAfterMultiplyClicked() {
-        return calcController.getState(States.Resoult);
+        return calcController.getState(States.TemporaryResoult);
     }
 
     @Override
     protected State stateAfterDivideClicked() {
-        return calcController.getState(States.Resoult);
+        return calcController.getState(States.TemporaryResoult);
     }
 
     @Override

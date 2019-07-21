@@ -12,8 +12,8 @@ public class ModelTest
     public void shouldStoreCorrectly() {
         CalcModel calcModel = new CalcModel();
     //No to głupie, ale narazie nic tam nie ma
-        calcModel.a = 5;
+        calcModel.setFirstOperand(5);
 
-        assertThat(calcModel.a).isEqualTo(5);
+        assertThat(calcModel.getFirstOperand()).isEqualTo(5);
     }
 }

@@ -1,7 +1,8 @@
 package pl.c2p.jft.kk.calc.controler;
 
-public class StateSecondEmpty extends State {
-    public StateSecondEmpty(CalcController controller) {
+public class StateTemporaryResoult extends State {
+
+    public StateTemporaryResoult(CalcController controller) {
         super(controller);
         keyboard.put(".", commands.get(""));
         keyboard.put("0", commands.get("r0"));
@@ -14,18 +15,18 @@ public class StateSecondEmpty extends State {
         keyboard.put("7", commands.get("r7"));
         keyboard.put("8", commands.get("r8"));
         keyboard.put("9", commands.get("r9"));
-        keyboard.put("+", commands.get(""));
-        keyboard.put("-", commands.get("!"));
-        keyboard.put("*", commands.get(""));
-        keyboard.put("/", commands.get(""));
+        keyboard.put("+", commands.get("+"));
+        keyboard.put("-", commands.get("-"));
+        keyboard.put("*", commands.get("*"));
+        keyboard.put("/", commands.get("/"));
         keyboard.put("=", commands.get(""));
         keyboard.put("Clear", commands.get("Clear"));
-        keyboard.put("Delete", commands.get(""));
+        keyboard.put("Delete", commands.get("Clear"));
     }
 
     @Override
     protected State stateAfterMinusClicked() {
-        return calcController.getState(States.SecondNegativeEmpty);
+        return calcController.getState(States.SecondEmpty);
     }
 
     @Override
@@ -35,17 +36,17 @@ public class StateSecondEmpty extends State {
 
     @Override
     protected State stateAfterPlusClicked() {
-        return this;
+        return calcController.getState(States.SecondEmpty);
     }
 
     @Override
     protected State stateAfterMultiplyClicked() {
-        return this;
+        return calcController.getState(States.SecondEmpty);
     }
 
     @Override
     protected State stateAfterDivideClicked() {
-        return this;
+        return calcController.getState(States.SecondEmpty);
     }
 
     @Override
@@ -60,11 +61,11 @@ public class StateSecondEmpty extends State {
 
     @Override
     protected State stateAfterDeleteClicked() {
-        return this;
+        return calcController.getState(States.FirstEmpty);
     }
 
     @Override
     protected State stateAfterDigitClicked() {
-        return calcController.getState(States.SecondIntegral);
+            return calcController.getState(States.SecondIntegral);
     }
 }
