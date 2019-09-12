@@ -65,7 +65,7 @@ public enum States {
         @Override
         public State getInstance(CalcController controller) {
             return controller.states.computeIfAbsent(this.name(), k -> new StateSecondNegativeIntegral(controller));
-        }
+    }
     },
     SecondNegativeFractional {
         @Override

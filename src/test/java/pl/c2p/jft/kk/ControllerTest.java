@@ -1,7 +1,9 @@
 package pl.c2p.jft.kk;
 
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 import org.mockito.InOrder;
 import org.mockito.Mockito;
 import pl.c2p.jft.kk.calc.controler.CalcController;
@@ -11,6 +13,7 @@ import pl.c2p.jft.kk.calc.ui.CalcWindow;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 
+@FixMethodOrder(MethodSorters.JVM)
 public class ControllerTest {
 
     CalcModel calcModel;
@@ -24,6 +27,8 @@ public class ControllerTest {
         calcWindow = spy(new CalcWindow());
         calcController = new CalcController(calcModel, calcWindow);
         calcWindow.registerObserver(calcController);
+
+
     }
 
     @Test
@@ -404,6 +409,7 @@ public class ControllerTest {
         inOrder.verify(calcWindow).setDisplay("1");
 
         inOrder.verify(calcWindow).setDisplay("-5.0");
+
     }
 
     @Test

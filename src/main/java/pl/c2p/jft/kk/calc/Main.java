@@ -24,6 +24,12 @@ public class Main {
     }
 
     public static void main(String... s) {
+
+//            double aa = 0x0.5P1;
+//            double ss = (double)((5d/16d)*2d);
+//            System.out.println(""+ss);
+//            System.out.printf("->"+aa);
+
         Main main = new Main();
     }
 
